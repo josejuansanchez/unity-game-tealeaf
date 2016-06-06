@@ -8,6 +8,7 @@ public class EnemyStats : MonoBehaviour
 	public Sprite[] avatarsForPaper;
 	public Sprite[] avatarsForPlastic;
 	public SpriteRenderer enemyAvatar;
+	public bool isEnemy = true;
 
 	void Start () 
 	{
@@ -33,6 +34,12 @@ public class EnemyStats : MonoBehaviour
 			index = Random.Range (0, avatarsForPlastic.Length);
 			enemyAvatar.sprite = avatarsForPlastic [index];
 			break;
-		}			
+		}
+			
+		// Check if the created object should be a enemy
+		if (GameObject.Find("Player").GetComponent<PlayerStats>().playerType == enemyType) {
+			isEnemy = false;
+		}
+
 	}
 }

@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
 	bool isJumping = false;
 	float gravity = 4f;
+	public GameController gameController;
 
 	// Update is called once per frame
 	void Update () 
@@ -29,7 +30,15 @@ public class PlayerController : MonoBehaviour
 		if (col.gameObject.name == "Ground") {
 			isJumping = false;
 		} else {
-			//Destroy (col.gameObject);
+			// Check if the object is an enemy and update the score
+			EnemyStats enemyStats = col.gameObject.transform.parent.GetComponent<EnemyStats> ();
+			if (enemyStats.isEnemy) {
+				gameController.AddScore (-1);
+			} else {
+				gameController.AddScore (1);
+			}
+				
+			// Destroy the object
 			Destroy (col.gameObject.transform.parent.gameObject);
 
 			// Trick to make that the player reach the ground slowly
