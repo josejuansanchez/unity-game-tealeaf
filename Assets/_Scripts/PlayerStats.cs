@@ -9,17 +9,10 @@ public class PlayerStats : MonoBehaviour
 
 	void Start () 
 	{
+		// Get the playerType form the static class
+		playerType = ScenesParameters.GetParameter ("playerType");
+
 		// Sets character avatar
 		playerAvatar.sprite = avatars [playerType];
-	}
-
-	public void ScoreSuccess()
-	{
-		Debug.LogError ("Score!");
-	}
-
-	public void ScoreFail()
-	{
-		Debug.LogError ("Fail!");
 	}
 }

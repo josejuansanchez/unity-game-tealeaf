@@ -7,32 +7,37 @@ public class EnemyStats : MonoBehaviour
 	public Sprite[] avatarsForOrganic;
 	public Sprite[] avatarsForPaper;
 	public Sprite[] avatarsForPlastic;
+	public Sprite[] avatarsForDangerous;
 	public SpriteRenderer enemyAvatar;
 	public bool isEnemy = true;
 
 	void Start () 
 	{
 		int index;
-		int enemyType = Random.Range (0, 4);
+		int enemyType = Random.Range (0, 5);
 
 		// Sets character avatar
 		switch (enemyType) 
 		{
-		case 0:
+		case PlayerTypes.PLAYER_TYPE_GLASS:
 			index = Random.Range (0, avatarsForGlass.Length);
 			enemyAvatar.sprite = avatarsForGlass [index];
 			break;
-		case 1:
+		case PlayerTypes.PLAYER_TYPE_ORGANIC:
 			index = Random.Range (0, avatarsForOrganic.Length);
 			enemyAvatar.sprite = avatarsForOrganic [index];
 			break;
-		case 2:
+		case PlayerTypes.PLAYER_TYPE_PAPER:
 			index = Random.Range (0, avatarsForPaper.Length);
 			enemyAvatar.sprite = avatarsForPaper [index];
 			break;
-		case 3:
+		case PlayerTypes.PLAYER_TYPE_PLASTIC:
 			index = Random.Range (0, avatarsForPlastic.Length);
 			enemyAvatar.sprite = avatarsForPlastic [index];
+			break;
+		case PlayerTypes.PLAYER_TYPE_DANGEROUS:
+			index = Random.Range (0, avatarsForDangerous.Length);
+			enemyAvatar.sprite = avatarsForDangerous [index];
 			break;
 		}
 			
