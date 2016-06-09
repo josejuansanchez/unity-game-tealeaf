@@ -8,7 +8,7 @@ public class SelectPlayerController : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape)) 
 		{ 
-			Application.LoadLevel("SplashScene");
+			Application.Quit();
 		}
 	}
 }

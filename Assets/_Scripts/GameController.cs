@@ -29,24 +29,24 @@ public class GameController : MonoBehaviour
 	{
 		if (score == MAX_SCORE && !gameOver) 
 		{
-			GameOver ("Well done! :)", winSound);
+			GameOver ("Well done!", winSound);
 		}
 
 		if (lifesController.GetNumberOfLifes () == 0 && !gameOver) 
 		{
-			GameOver ("Game Over :(", gameOverSound);
+			GameOver ("Game Over", gameOverSound);
 		}
 
 		if (gameOver) 
 		{
 			if(Input.touchCount == 1)
 			{
-				Application.LoadLevel("SplashScene");
+				Application.LoadLevel("SelectPlayerScene");
 			}
 
 			if (Input.GetMouseButtonDown (0)) 
 			{
-				Application.LoadLevel("SplashScene");
+				Application.LoadLevel("SelectPlayerScene");
 			}		
 		}
 
