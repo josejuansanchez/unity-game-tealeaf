@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 	bool isJumping = false;
 	float gravity = 4f;
 	public GameController gameController;
-	public AudioSource source;
+	public AudioSource audio;
 	public AudioClip jumpSound;
 	public AudioClip successSound;
 	public AudioClip failSound;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Awake() 
 	{
-		source = GetComponent<AudioSource> ();
+		audio = GetComponent<AudioSource> ();
 	}
 
 	// Update is called once per frame
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 		//if (Input.GetKeyDown(KeyCode.Space) && !isJumping) 
 		{
  			GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
-			source.PlayOneShot (jumpSound, 0.5f);
+			audio.PlayOneShot (jumpSound, 0.5f);
 			isJumping = true;
 		}
 			
@@ -50,12 +50,12 @@ public class PlayerController : MonoBehaviour
 			if (enemyStats.isEnemy) 
 			{
 				gameController.AddScore (-1);
-				source.PlayOneShot (failSound, 0.5f);
+				audio.PlayOneShot (failSound, 0.5f);
 			} 
 			else 
 			{
 				gameController.AddScore (1);
-				source.PlayOneShot (successSound, 0.5f);
+				audio.PlayOneShot (successSound, 0.5f);
 			}
 				
 			// Destroy the object

@@ -3,11 +3,13 @@ using System.Collections;
 
 public class GameController : MonoBehaviour 
 {
-
 	public LifesController lifesController;
 	public Transform scoreText;
 	public Transform playerName;
 	public Transform gameOverText;
+	public AudioSource audio;
+	public AudioClip winSound;
+	public AudioClip gameOverSound;
 
 	private const int MAX_SCORE = 5;
 	private int score;
@@ -20,18 +22,19 @@ public class GameController : MonoBehaviour
 		score = 0;
 		UpdateScore ();
 		DisplayPlayerName ();
+		audio = GetComponent<AudioSource> ();
 	}
 
 	void Update() 
 	{
-		if (score == MAX_SCORE) 
+		if (score == MAX_SCORE && !gameOver) 
 		{
-			GameOver ("Well done! :)");
+			GameOver ("Well done! :)", winSound);
 		}
 
-		if (lifesController.GetNumberOfLifes () == 0) 
+		if (lifesController.GetNumberOfLifes () == 0 && !gameOver) 
 		{
-			GameOver ("Game Over :(");
+			GameOver ("Game Over :(", gameOverSound);
 		}
 
 		if (gameOver) 
@@ -99,13 +102,17 @@ public class GameController : MonoBehaviour
 	}
 
 
-	public void GameOver (string text)
+	public void GameOver (string text, AudioClip clip)
 	{
 		gameOver = true;
 
 		gameOverText.GetChild (0).GetComponent<GUIText> ().text = text;
 		gameOverText.GetChild (1).GetComponent<GUIText> ().text = text;
 
+		audio.Stop ();
+		audio.PlayOneShot (clip, 0.5f);
+
 		Destroy (GameObject.Find ("Player"));
+		Destroy (GameObject.Find ("EnemiesController"));
 	}
 }
